@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/LosGlennos/scrumsheet.svg?branch=master)](https://travis-ci.org/LosGlennos/scrumsheet)
+
 # scrumsheet
 
 > An electron-vue project
