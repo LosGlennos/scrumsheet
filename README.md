@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/LosGlennos/scrumsheet.svg?branch=master)](https://travis-ci.org/LosGlennos/scrumsheet)
+![https://ci.appveyor.com/api/projects/status/losglennos/scrumsheet?svg=true](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
 
 # scrumsheet
 
