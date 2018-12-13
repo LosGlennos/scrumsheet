@@ -48,6 +48,7 @@
         </md-app-content>
       </md-app>
     </div>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
   </div>
 </template>
 
@@ -85,3 +86,4 @@ export default {
 }
 /* CSS */
 </style>
+

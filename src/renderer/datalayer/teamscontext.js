@@ -1,5 +1,6 @@
 import * as NeDBDataStore from 'nedb';
 import * as path from 'path';
+import { remote } from 'electron';
 
 export class TeamsContext {
   static context = null;
@@ -9,7 +10,7 @@ export class TeamsContext {
     }
 
     this.context = new NeDBDataStore({
-      filename: path.join(path.resolve(__dirname), '/teamscontext.db'),
+      filename: path.join(remote.app.getPath('appData'), '/teams.db'),
       autoload: true
     });
   }
@@ -20,7 +21,10 @@ export class TeamsContext {
     };
 
     return new Promise(resolve => this.context.insert(team, (err) => {
-      console.log(err);
+      if (err) {
+        throw err;
+      }
+
       resolve();
     }));
   }
@@ -31,6 +35,15 @@ export class TeamsContext {
         throw err;
       }
       resolve(data);
+    }));
+  }
+
+  deleteTeam(id) {
+    return new Promise(resolve => this.context.remove({_id: id}, {multi: false}, (err, data) => {
+      if (err) {
+        throw err;
+      }
+      resolve();
     }));
   }
 };
