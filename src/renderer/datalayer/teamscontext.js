@@ -19,9 +19,10 @@ export class TeamsContext {
       name: name
     };
 
-    this.context.insert(team, (err) => {
+    return new Promise(resolve => this.context.insert(team, (err) => {
       console.log(err);
-    });
+      resolve();
+    }));
   }
 
   getTeams() {

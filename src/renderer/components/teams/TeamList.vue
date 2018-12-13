@@ -1,6 +1,8 @@
 <template>
   <div>
-    <md-content class="md-elevation-5" v-for="team in teams" :key="team._id"><md-avatar class="md-avatar-icon">A</md-avatar>{{ team.name }}</md-content>
+    <md-content class="md-elevation-5" v-for="team in teams" :key="team._id">
+      <md-avatar class="md-avatar-icon">A</md-avatar>{{ team.name }}
+    </md-content>
   </div>
 </template>
 
@@ -15,10 +17,17 @@ export default {
     };
   },
   created: function(event) {
-    var context = new TeamsContext();
-    context.getTeams().then((data) => {
-      this.teams = data;
-    });
+    this.getTeams();
+    this.$eventHub.$on('add-team', this.getTeams);
+  },
+  methods: {
+    getTeams: function() {
+      var context = new TeamsContext();
+      context.getTeams().then((data) => {
+        console.log(data);
+        this.teams = data;
+      });
+    }
   }
 };
 </script>
@@ -26,5 +35,6 @@ export default {
 <style>
 .md-content {
   height: 60px;
+  margin: 15px;
 }
 </style>

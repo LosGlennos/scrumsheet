@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="md-alignment-center">
     <add-team></add-team>
 
     <team-list></team-list>
