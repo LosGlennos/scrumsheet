@@ -1,11 +1,18 @@
 <template>
   <div>
-    <md-content class="md-elevation-5" v-for="team in teams" :key="team._id">
-      <md-avatar class="md-avatar-icon">A</md-avatar>{{ team.name }}
-      <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click="deleteTeam(team._id)">
-        <md-icon>delete</md-icon>
-      </md-button>
-    </md-content>
+    <router-link class="md-elevation-5 md-layout md-alignment-center" v-for="team in teams" :key="team._id" to="`teams/{team._id}`">
+      <div class="md-layout-item md-size-5">
+        <md-avatar class="md-avatar-icon">?</md-avatar>
+      </div>
+      <div class="md-layout-item md-size-90">
+        <span class="">{{ team.name }}</span>
+      </div>
+      <div class="md-layout-item md-size-5">
+        <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click="deleteTeam(team._id)">
+          <md-icon>delete</md-icon>
+        </md-button>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -27,7 +34,6 @@ export default {
     getTeams: function() {
       var context = new TeamsContext();
       context.getTeams().then((data) => {
-        console.log(data);
         this.teams = data;
       });
     },
@@ -42,8 +48,18 @@ export default {
 </script>
 
 <style>
-.md-content {
+.md-layout {
   height: 60px;
   margin: 15px;
+}
+
+a:not(.md-button):hover {
+    text-decoration: none;
+    background: lightgray;
+}
+
+span {
+  color: #5d5d5d;
+  font-size: 120%;
 }
 </style>

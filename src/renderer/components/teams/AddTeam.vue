@@ -28,6 +28,7 @@ export default {
     addTeam: function(name) {
       var context = new TeamsContext();
       context.addTeam(name).then(() => {
+        this.name = '';
         this.$eventHub.$emit('add-team', name);
       });
     }

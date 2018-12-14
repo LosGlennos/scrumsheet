@@ -1,4 +1,4 @@
-![https://ci.appveyor.com/api/projects/status/losglennos/scrumsheet](https://ci.appveyor.com/api/projects/status/losglennos/scrumsheet)
+![https://ci.appveyor.com/api/projects/status/github/losglennos/scrumsheet](https://ci.appveyor.com/api/projects/status/github/losglennos/scrumsheet?svg=true)
 
 # scrumsheet
 
