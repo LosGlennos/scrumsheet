@@ -2,17 +2,21 @@ import * as NeDBDataStore from 'nedb';
 import * as path from 'path';
 import { remote } from 'electron';
 
+let instance = null;
+
 export default class TeamsContext {
-  static context = null;
+  static context;
   constructor() {
-    if (this.context) {
-      return this.context;
+    if (!instance) {
+      instance = this;
+
+      this.context = new NeDBDataStore({
+        filename: path.join(remote.app.getPath('appData'), 'scrumsheet/db/teams.db'),
+        autoload: true
+      });
     }
 
-    this.context = new NeDBDataStore({
-      filename: path.join(remote.app.getPath('appData'), 'scrumsheet/db/teams.db'),
-      autoload: true
-    });
+    return instance;
   }
 
   addTeam(name) {
