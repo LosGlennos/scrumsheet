@@ -28,7 +28,7 @@ export default {
   },
   created: function(event) {
     this.getMembers();
-    this.$eventHub.$on('add-member', this.getTeams);
+    this.$eventHub.$on('add-member', this.getMembers);
   },
   methods: {
     getMembers: function() {
