@@ -8,7 +8,7 @@
         <span class="">{{ team.name }}</span>
       </div>
       <div class="md-layout-item md-size-5">
-        <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click="deleteTeam(team._id)">
+        <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click.prevent="deleteTeam(team._id)">
           <md-icon>delete</md-icon>
         </md-button>
       </div>
