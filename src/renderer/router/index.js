@@ -6,13 +6,23 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      path: '/teams',
+      name: 'teams-page',
+      component: require('@/components/teams/TeamsPage').default
+    },
+    {
+      path: '/teams/:id',
+      name: 'team-page',
+      component: require('@/components/team/TeamPage').default
+    },
+    {
+      path: 'teams/:id/members',
+      name: 'members-page',
+      component: require('@/components/team/teammembers/MembersPage').default
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: '/teams'
     }
   ]
 });

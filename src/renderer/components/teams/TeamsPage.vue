@@ -1,5 +1,5 @@
 <template>
-  <div class="md-alignment-center">
+  <div class="md-gutter">
     <add-team></add-team>
 
     <team-list></team-list>
@@ -11,7 +11,7 @@ import AddTeam from './AddTeam';
 import TeamList from './TeamList';
 
 export default {
-  name: 'teams',
+  name: 'teams-page',
   components: {AddTeam, TeamList},
   methods: {
 

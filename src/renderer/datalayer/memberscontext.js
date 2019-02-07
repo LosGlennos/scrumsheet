@@ -2,7 +2,7 @@ import * as NeDBDataStore from 'nedb';
 import * as path from 'path';
 import { remote } from 'electron';
 
-export default class TeamsContext {
+export default class {
   static context = null;
   constructor() {
     if (this.context) {
@@ -10,17 +10,18 @@ export default class TeamsContext {
     }
 
     this.context = new NeDBDataStore({
-      filename: path.join(remote.app.getPath('appData'), 'scrumsheet/db/teams.db'),
+      filename: path.join(remote.app.getPath('appData'), '/scrumsheet/db/members.db'),
       autoload: true
     });
   }
 
-  addTeam(name) {
-    var team = {
-      name: name
+  addMember(name, teamId) {
+    var member = {
+      name: name,
+      teamId: teamId
     };
 
-    return new Promise(resolve => this.context.insert(team, (err) => {
+    return new Promise(resolve => this.context.insert(member, (err) => {
       if (err) {
         throw err;
       }
@@ -29,8 +30,8 @@ export default class TeamsContext {
     }));
   }
 
-  getTeams() {
-    return new Promise(resolve => this.context.find({}, (err, data) => {
+  getMembers(teamId) {
+    return new Promise(resolve => this.context.find({teamId: teamId}, (err, data) => {
       if (err) {
         throw err;
       }
@@ -38,7 +39,7 @@ export default class TeamsContext {
     }));
   }
 
-  deleteTeam(id) {
+  deleteMember(id) {
     return new Promise(resolve => this.context.remove({_id: id}, {multi: false}, (err, data) => {
       if (err) {
         throw err;

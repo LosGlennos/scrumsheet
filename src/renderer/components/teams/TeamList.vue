@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link class="md-elevation-5 md-layout md-alignment-center" v-for="team in teams" :key="team._id" to="`teams/{team._id}`">
+    <router-link class="md-elevation-5 md-layout md-alignment-center" v-for="team in teams" :key="team._id" :to="{ name: 'team-page', params: { id: team._id }}">
       <div class="md-layout-item md-size-5">
         <md-avatar class="md-avatar-icon">?</md-avatar>
       </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { TeamsContext } from '../../datalayer/teamscontext';
+import TeamsContext from '../../datalayer/teamscontext';
 
 export default {
   name: 'team-list',
