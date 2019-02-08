@@ -7,16 +7,20 @@
         <md-tab id="tab-home" md-label="Capacity" md-icon="access_time"></md-tab>
         <md-tab id="tab-pages" md-label="Velocity" md-icon="timeline"></md-tab>
         <md-tab id="tab-posts" md-label="Happiness" md-icon="sentiment_satisfied_alt"></md-tab>
+        <md-tab id="tab-sprints" md-label="Sprints" md-icon="autorenew">
+          <sprints-page></sprints-page>
+        </md-tab>
       </md-tabs>
     </div>
 </template>
 
 <script>
 import MembersPage from './teammembers/MembersPage';
+import SprintsPage from './sprints/SprintsPage';
 
 export default {
   name: 'team-page',
-  components: {MembersPage},
+  components: {MembersPage, SprintsPage},
   data: function() {
     return {
       id: ''
@@ -32,4 +36,7 @@ export default {
 </script>
 
 <style>
+.md-content.md-tabs-content.md-theme-default {
+  height: 100% !important;
+}
 </style>

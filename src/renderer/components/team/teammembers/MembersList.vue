@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="members.length > 0">
     <div class="md-elevation-5 md-layout md-alignment-center" v-for="member in members" :key="member._id">
       <div class="md-layout-item md-size-5">
         <md-avatar class="md-avatar-icon">?</md-avatar>
