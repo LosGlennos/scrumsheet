@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <router-link class="md-elevation-5 md-layout md-alignment-center" v-for="team in teams" :key="team._id" :to="{ name: 'team-page', params: { id: team._id }}">
+  <md-list>
+    <router-link class="md-elevation-5 md-layout md-alignment-center" v-for="team in teams" :key="team._id" :to="{ name: 'team-page', params: { id: team._id }}" tag="md-list-item">
       <div class="md-layout-item md-size-5">
         <md-avatar class="md-avatar-icon">?</md-avatar>
       </div>
       <div class="md-layout-item md-size-90">
         <span class="">{{ team.name }}</span>
       </div>
-      <div class="md-layout-item md-size-5">
+      <div class="md-layout-item md-size-5 last-column">
         <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click.prevent="deleteTeam(team._id)">
           <md-icon>delete</md-icon>
         </md-button>
       </div>
     </router-link>
-  </div>
+  </md-list>
 </template>
 
 <script>
@@ -61,5 +61,12 @@ a:not(.md-button):hover {
 span {
   color: #5d5d5d;
   font-size: 120%;
+}
+.md-list-item {
+  padding: 5px;
+  margin: 0 0 5px 0;
+}
+.last-column {
+  text-align: right;
 }
 </style>

@@ -1,21 +1,29 @@
 <template>
-  <div v-if="sprints.length > 0">
-    <div class="md-elevation-5 md-layout md-alignment-center" v-for="sprint in sprints" :key="sprint._id">
-      <div class="md-layout-item md-size-30">
-        <span class>{{ sprint.name }}</span>
-      </div>
-      <div class="md-layout-item md-size-20">
-        <span class>{{ sprint.startDate | formatDate}}</span>
+  <md-list v-if="sprints.length > 0">
+      <md-list-item class="md-elevation-5" v-for="sprint in sprints" :key="sprint._id">
+      <!--   <div class="md-layout-item md-size-5">
+          <md-avatar class="md-avatar-icon">?</md-avatar>
+        </div> -->
+        <div class="md-layout-item md-size-30">
+          <span class>{{ sprint.name }}</span>
+        </div>
+        <div class="md-layout-item md-size-5">
+          <span class>{{ sprint.startDate | formatDate}}</span>
+        </div>
         <md-icon>arrow_forward</md-icon>
-        <span class>{{ sprint.endDate | formatDate}}</span>
-      </div>
-      <div class="md-layout-item md-size-5">
-        <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click="deleteSprint(sprint._id)">
-          <md-icon>delete</md-icon>
-        </md-button>
-      </div>
-    </div>
-  </div>
+        <div class="md-layout-item md-size-5">
+          <span class>{{ sprint.endDate | formatDate}}</span>
+        </div>
+        <div class="md-layout-item md-size-5 last-column">
+          <md-button
+            class="delete-button md-icon-button md-accent md-raised"
+            v-on:click="deleteSprint(sprint._id)"
+          >
+            <md-icon>delete</md-icon>
+          </md-button>
+        </div>
+      </md-list-item>
+    </md-list>
 </template>
 
 <script>
@@ -44,7 +52,9 @@ export default {
     getSprints: function() {
       var context = new SprintsContext();
       context.getSprints(this.$route.params.id).then(data => {
-        this.sprints = data.sort((a, b) => { return new Date(a.startDate) - new Date(b.startDate); });
+        this.sprints = data.sort((a, b) => {
+          return new Date(a.startDate) - new Date(b.startDate);
+        });
       });
     },
     deleteSprint: function(id) {
@@ -71,5 +81,12 @@ a:not(.md-button):hover {
 span {
   color: #5d5d5d;
   font-size: 120%;
+}
+.md-list-item {
+  padding: 5px;
+  margin: 0 0 5px 0;
+}
+.last-column {
+  text-align: right;
 }
 </style>

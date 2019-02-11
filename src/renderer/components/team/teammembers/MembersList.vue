@@ -1,19 +1,19 @@
 <template>
-  <div v-if="members.length > 0">
-    <div class="md-elevation-5 md-layout md-alignment-center" v-for="member in members" :key="member._id">
+  <md-list v-if="members.length > 0">
+    <md-list-item class="md-elevation-5 md-layout md-alignment-center" v-for="member in members" :key="member._id">
       <div class="md-layout-item md-size-5">
         <md-avatar class="md-avatar-icon">?</md-avatar>
       </div>
       <div class="md-layout-item md-size-90">
         <span class="">{{ member.name }}</span>
       </div>
-      <div class="md-layout-item md-size-5">
+      <div class="md-layout-item md-size-5 last-column">
         <md-button class="delete-button md-icon-button md-accent md-raised" v-on:click="deleteMember(member._id)">
           <md-icon>delete</md-icon>
         </md-button>
       </div>
-    </div>
-  </div>
+    </md-list-item>
+  </md-list>
 </template>
 
 <script>
@@ -61,5 +61,12 @@ a:not(.md-button):hover {
 span {
   color: #5d5d5d;
   font-size: 120%;
+}
+.md-list-item {
+  padding: 5px;
+  margin: 0 0 5px 0;
+}
+.last-column {
+  text-align: right;
 }
 </style>

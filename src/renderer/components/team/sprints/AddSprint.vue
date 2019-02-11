@@ -18,7 +18,10 @@
         </md-datepicker>
       </div>
       <div class="md-layout-item md-size-15">
-        <md-button class="md-raised md-primary" v-on:click="addSprint(name, startDate, endDate)">Add Sprint</md-button>
+        <md-button
+          class="md-raised md-primary"
+          v-on:click="addSprint(name, startDate, endDate)"
+        >Add Sprint</md-button>
       </div>
     </div>
   </div>
@@ -43,8 +46,8 @@ export default {
       var teamId = this.$route.params.id;
       context.addSprint(name, startDate, endDate, teamId).then(() => {
         this.name = '';
-        this.startDate = null;
-        this.endDate = null;
+        this.startDate = '';
+        this.endDate = '';
         this.$eventHub.$emit('add-sprint', name);
       });
     }
