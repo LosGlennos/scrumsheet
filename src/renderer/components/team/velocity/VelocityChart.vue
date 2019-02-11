@@ -48,7 +48,10 @@ export default {
           for (let i = 0; i < velocity.length; i++) {
             if (velocity[i]) {
               if (i < velocity.length - 1 || (i === velocity.length - 1 && (velocity[i].allocatedEffort || velocity[i].actualEffort))) {
-                component.chartData.push([sprints.find(x => x._id === velocity[i].sprintId).name, parseInt(velocity[i].allocatedEffort), parseInt(velocity[i].actualEffort)]);
+                component.chartData.push([
+                  sprints.find(x => x._id === velocity[i].sprintId).name,
+                  parseInt(velocity[i].allocatedEffort),
+                  parseInt(velocity[i].actualEffort)]);
               }
             }
           }
