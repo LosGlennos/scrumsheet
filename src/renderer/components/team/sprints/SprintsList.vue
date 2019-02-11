@@ -1,17 +1,12 @@
 <template>
   <div v-if="sprints.length > 0">
     <div class="md-elevation-5 md-layout md-alignment-center" v-for="sprint in sprints" :key="sprint._id">
-      <div class="md-layout-item md-size-5">
-        <md-avatar class="md-avatar-icon">?</md-avatar>
-      </div>
       <div class="md-layout-item md-size-30">
         <span class>{{ sprint.name }}</span>
       </div>
-      <div class="md-layout-item md-size-5">
+      <div class="md-layout-item md-size-20">
         <span class>{{ sprint.startDate | formatDate}}</span>
-      </div>
-      <md-icon>arrow_forward</md-icon>
-      <div class="md-layout-item md-size-5">
+        <md-icon>arrow_forward</md-icon>
         <span class>{{ sprint.endDate | formatDate}}</span>
       </div>
       <div class="md-layout-item md-size-5">

@@ -4,10 +4,12 @@
         <md-tab id="tab-team" md-label="Team" md-icon="people">
           <members-page></members-page>
         </md-tab>
-        <md-tab id="tab-home" md-label="Capacity" md-icon="access_time">
+        <md-tab id="tab-capacity" md-label="Capacity" md-icon="access_time">
           <capacity-page></capacity-page>
         </md-tab>
-        <md-tab id="tab-pages" md-label="Velocity" md-icon="timeline"></md-tab>
+        <md-tab id="tab-pages" md-label="Velocity" md-icon="timeline">
+          <velocity-page></velocity-page>
+        </md-tab>
         <md-tab id="tab-posts" md-label="Happiness" md-icon="sentiment_satisfied_alt"></md-tab>
         <md-tab id="tab-sprints" md-label="Sprints" md-icon="autorenew">
           <sprints-page></sprints-page>
@@ -20,10 +22,11 @@
 import MembersPage from './teammembers/MembersPage';
 import SprintsPage from './sprints/SprintsPage';
 import CapacityPage from './capacity/CapacityPage';
+import VelocityPage from './velocity/VelocityPage';
 
 export default {
   name: 'team-page',
-  components: {MembersPage, SprintsPage, CapacityPage},
+  components: {MembersPage, SprintsPage, CapacityPage, VelocityPage},
   data: function() {
     return {
       id: ''

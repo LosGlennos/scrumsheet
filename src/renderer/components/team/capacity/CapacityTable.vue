@@ -55,7 +55,7 @@ export default {
         this.members = data;
 
         sprintsContext.getSprints(this.$route.params.id).then((data) => {
-          component.sprints = data;
+          component.sprints = data.sort((a, b) => { return new Date(a.startDate) - new Date(b.startDate); });
 
           capacityContext.getCapacityByTeamId(this.$route.params.id).then((data) => {
             component.hours = {};
@@ -79,7 +79,7 @@ export default {
     getTotalHoursForSprint(id) {
       var totalHours = 0;
       for (var i = 0; i < this.members.length; i++) {
-        if (this.hours[this.members[i]._id][id]) {
+        if (this.hours && this.hours[this.members[i]._id][id]) {
           totalHours += parseInt(this.hours[this.members[i]._id][id]);
         }
       }

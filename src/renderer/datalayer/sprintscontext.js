@@ -45,6 +45,15 @@ export default class SprintsContext {
     }));
   }
 
+  getSprint(id) {
+    return new Promise(resolve => this.context.findOne({_id: id}, (err, data) => {
+      if (err) {
+        throw err;
+      }
+      resolve(data);
+    }));
+  }
+
   deleteSprint(id) {
     return new Promise(resolve => this.context.remove({_id: id}, {multi: false}, (err, data) => {
       if (err) {
