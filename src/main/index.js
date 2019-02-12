@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron';
 const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
 
 /**
  * Set `__static` path to static files in production
@@ -10,6 +11,9 @@ const { autoUpdater } = require('electron-updater');
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\');
 }
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
 
 let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
@@ -35,7 +39,9 @@ function createWindow() {
 
 app.on('ready', function() {
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.checkForUpdates();
+  }
 });
 
 app.on('window-all-closed', () => {
@@ -58,14 +64,33 @@ app.on('activate', () => {
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
 
-/*
-import { autoUpdater } from 'electron-updater'
-
 autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
+  autoUpdater.quitAndInstall();
+});
 
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */
+autoUpdater.on('checking-for-update', () => {
+  log.info('Checking for update...');
+});
+
+autoUpdater.on('update-available', (info) => {
+  log.info('Update available.');
+});
+
+autoUpdater.on('update-not-available', (info) => {
+  log.info('Update not available.');
+});
+
+autoUpdater.on('error', (err) => {
+  log.info('Error in auto-updater. ' + err);
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+  let logMessage = 'Download speed: ' + progressObj.bytesPerSecond;
+  logMessage = logMessage + ' - Downloaded ' + progressObj.percent + '%';
+  logMessage = logMessage + ' (' + progressObj.transferred + '/' + progressObj.total + ')';
+  log.info(logMessage);
+});
+
+autoUpdater.on('update-downloaded', (info) => {
+  log.info('Update downloaded');
+});
