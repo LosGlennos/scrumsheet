@@ -1,7 +1,7 @@
 'use strict';
 
 import { app, BrowserWindow } from 'electron';
-const { autoUpdater } = require("electron-updater");
+const { autoUpdater } = require('electron-updater');
 
 /**
  * Set `__static` path to static files in production
