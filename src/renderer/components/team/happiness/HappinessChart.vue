@@ -39,12 +39,8 @@ export default {
     getChartData() {
       var happinessContext = new HappinessContext();
       var sprintContext = new SprintsContext();
-      var component = this;
       sprintContext.getSprints(this.$route.params.id).then(sprints => {
         happinessContext.getHappinessByTeamId(this.$route.params.id).then((happiness) => {
-          var chartData = component.chartData[0];
-          component.chartData = [];
-          component.chartData.push(chartData);
           var unsortedChartData = [];
           for (let i = 0; i < happiness.length; i++) {
             if (happiness[i]) {

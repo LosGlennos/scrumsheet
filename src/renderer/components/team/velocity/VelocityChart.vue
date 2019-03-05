@@ -39,24 +39,48 @@ export default {
     getChartData() {
       var velocityContext = new VelocityContext();
       var sprintContext = new SprintsContext();
-      var component = this;
       sprintContext.getSprints(this.$route.params.id).then(sprints => {
         velocityContext.getVelocityByTeamId(this.$route.params.id).then((velocity) => {
-          var chartData = component.chartData[0];
-          component.chartData = [];
-          component.chartData.push(chartData);
+          var unsortedChartData = [];
           for (let i = 0; i < velocity.length; i++) {
             if (velocity[i]) {
               if (i < velocity.length - 1 || (i === velocity.length - 1 && (velocity[i].allocatedEffort || velocity[i].actualEffort))) {
-                component.chartData.push([
+                unsortedChartData.push([
                   sprints.find(x => x._id === velocity[i].sprintId).name,
                   parseInt(velocity[i].allocatedEffort),
                   parseInt(velocity[i].actualEffort)]);
               }
             }
           }
+
+          this.pushSortedDataToChart(unsortedChartData, sprints);
         });
       });
+    },
+
+    pushSortedDataToChart(unsortedChartData, sprints) {
+      var sortedChartData = this.sortChartData(unsortedChartData, sprints);
+      sortedChartData.forEach(x => {
+        if (x) {
+          this.chartData.push(x);
+        }
+      });
+    },
+    sortChartData(unsortedChartData, sprints) {
+      var sortedSprints = sprints.sort((a, b) => {
+        return new Date(a.startDate) - new Date(b.startDate);
+      });
+
+      var sortedChartData = [];
+      var sprintNameIndex = 0;
+      for (let i = 0; i < sortedSprints.length; i++) {
+        var chartData = unsortedChartData.find(x => {
+          return sortedSprints[i].name === x[sprintNameIndex];
+        });
+        sortedChartData.push(chartData);
+      }
+
+      return sortedChartData;
     }
   }
 };
