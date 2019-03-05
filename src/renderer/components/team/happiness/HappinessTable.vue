@@ -42,6 +42,7 @@ export default {
     getHappiness: function() {
       var sprintsContext = new SprintsContext();
       var happinessContext = new HappinessContext();
+
       var component = this;
       sprintsContext.getSprints(this.$route.params.id).then((sprints) => {
         this.sprints = sprints.sort((a, b) => { return new Date(a.startDate) - new Date(b.startDate); });

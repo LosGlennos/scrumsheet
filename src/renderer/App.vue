@@ -44,8 +44,16 @@ import Vue from 'vue';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
+import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker';
+import 'vue-airbnb-style-datepicker/dist/vue-airbnb-style-datepicker.min.css';
+
+var datepickerOptions = {
+  sundayFirst: false,
+  dateLabelFormat: 'yyyy-MM-dd'
+};
 
 Vue.use(VueMaterial);
+Vue.use(AirbnbStyleDatepicker, datepickerOptions);
 
 export default {
   name: 'scrumsheet',

@@ -7,15 +7,20 @@
           <md-input v-model="name"></md-input>
         </md-field>
       </div>
-      <div class="md-layout-item md-size-15">
-        <md-datepicker v-model="startDate" md-immediately>
-          <label>Start date</label>
-        </md-datepicker>
-      </div>
-      <div class="md-layout-item md-size-15">
-        <md-datepicker v-model="endDate" md-immediately>
-          <label>End date</label>
-        </md-datepicker>
+      <div class="datepicker-trigger">
+        <md-field>
+          <label>Select Date</label>
+          <md-input id="datepicker-trigger" v-model="formattedDates"></md-input>
+        </md-field>
+        <AirbnbStyleDatepicker
+          :trigger-element-id="'datepicker-trigger'"
+          :mode="'range'"
+          :date-one="startDate"
+          :date-two="endDate"
+          @date-one-selected="val => { startDate = val }"
+          @date-two-selected="val => { endDate = val }"
+          @apply="formatDates(startDate, endDate)"
+        />
       </div>
       <div class="md-layout-item md-size-15">
         <md-button
@@ -28,28 +33,31 @@
 </template>
 
 <script>
-import SprintsContext from '../../../datalayer/sprintscontext';
+import SprintsContext from "../../../datalayer/sprintscontext";
+import moment from "moment";
 
 export default {
-  name: 'add-sprint',
+  name: "add-sprint",
   data: () => ({
-    name: '',
+    name: "",
     startDate: null,
-    endDate: null
+    endDate: null,
+    formattedDates: null
   }),
-  created: function(event) {
-    this.$material.locale.firstDayOfAWeek = 1;
-  },
   methods: {
     addSprint: function(name, startDate, endDate) {
       var context = new SprintsContext();
       var teamId = this.$route.params.id;
       context.addSprint(name, startDate, endDate, teamId).then(() => {
-        this.name = '';
-        this.startDate = '';
-        this.endDate = '';
-        this.$eventHub.$emit('add-sprint', name);
+        this.name = "";
+        this.startDate = "";
+        this.endDate = "";
+        this.formattedDates = "";
+        this.$eventHub.$emit("add-sprint", name);
       });
+    },
+    formatDates(startDate, endDate) {
+      this.formattedDates = `${moment(String(startDate)).format("YYYY-MM-DD")} - ${moment(String(endDate)).format("YYYY-MM-DD")}`;
     }
   }
 };

@@ -39,6 +39,9 @@ export default {
     getChartData() {
       var velocityContext = new VelocityContext();
       var sprintContext = new SprintsContext();
+
+      this.resetChartData();
+
       sprintContext.getSprints(this.$route.params.id).then(sprints => {
         velocityContext.getVelocityByTeamId(this.$route.params.id).then((velocity) => {
           var unsortedChartData = [];
@@ -81,6 +84,11 @@ export default {
       }
 
       return sortedChartData;
+    },
+    resetChartData() {
+      this.chartData = [
+        ['Sprint', 'Allocated', 'Actual']
+      ];
     }
   }
 };
