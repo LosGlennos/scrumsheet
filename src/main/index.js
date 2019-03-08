@@ -14,6 +14,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.autoDownload = true;
 
 let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
@@ -40,7 +41,7 @@ function createWindow() {
 app.on('ready', function() {
   createWindow();
   if (process.env.NODE_ENV === 'production') {
-    autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdatesAndNotify();
   }
 });
 

@@ -39,8 +39,7 @@ export default {
     getChartData() {
       var velocityContext = new VelocityContext();
       var sprintContext = new SprintsContext();
-
-      this.resetChartData();
+      var component = this;
 
       sprintContext.getSprints(this.$route.params.id).then(sprints => {
         velocityContext.getVelocityByTeamId(this.$route.params.id).then((velocity) => {
@@ -56,12 +55,14 @@ export default {
             }
           }
 
-          this.pushSortedDataToChart(unsortedChartData, sprints);
+          component.pushSortedDataToChart(unsortedChartData, sprints);
         });
       });
     },
 
     pushSortedDataToChart(unsortedChartData, sprints) {
+      this.resetChartData();
+
       var sortedChartData = this.sortChartData(unsortedChartData, sprints);
       sortedChartData.forEach(x => {
         if (x) {
