@@ -37,6 +37,7 @@ export default {
   }),
   created: function(event) {
     this.getCapacityTable();
+    this.$eventHub.$on('add-sprint', this.getCapacityTable);
   },
   methods: {
     saveCapacity: function(hours, sprintId, memberId) {

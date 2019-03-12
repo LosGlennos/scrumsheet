@@ -37,6 +37,7 @@ export default {
   }),
   created: function(event) {
     this.getVelocity();
+    this.$eventHub.$on('add-sprint', this.getVelocity);
   },
   methods: {
     saveAllocatedEffort: function(effort, sprintId) {

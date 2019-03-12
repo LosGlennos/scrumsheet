@@ -1,23 +1,21 @@
 <template>
-    <div>
-      <md-tabs md-alignment="fixed">
-        <md-tab id="tab-team" md-label="Team" md-icon="people">
-          <members-page></members-page>
-        </md-tab>
-        <md-tab id="tab-capacity" md-label="Capacity" md-icon="access_time">
-          <capacity-page></capacity-page>
-        </md-tab>
-        <md-tab id="tab-pages" md-label="Velocity" md-icon="timeline">
-          <velocity-page></velocity-page>
-        </md-tab>
-        <md-tab id="tab-happiness" md-label="Happiness" md-icon="sentiment_satisfied_alt">
-          <happiness-page></happiness-page>
-        </md-tab>
-        <md-tab id="tab-sprints" md-label="Sprints" md-icon="autorenew">
-          <sprints-page></sprints-page>
-        </md-tab>
-      </md-tabs>
-    </div>
+  <md-tabs md-alignment="fixed">
+    <md-tab id="tab-team" md-label="Team" md-icon="people">
+      <members-page></members-page>
+    </md-tab>
+    <md-tab id="tab-capacity" md-label="Capacity" md-icon="access_time">
+      <capacity-page></capacity-page>
+    </md-tab>
+    <md-tab id="tab-pages" md-label="Velocity" md-icon="timeline">
+      <velocity-page></velocity-page>
+    </md-tab>
+    <md-tab id="tab-happiness" md-label="Happiness" md-icon="sentiment_satisfied_alt">
+      <happiness-page></happiness-page>
+    </md-tab>
+    <md-tab id="tab-sprints" md-label="Sprints" md-icon="autorenew">
+      <sprints-page></sprints-page>
+    </md-tab>
+  </md-tabs>
 </template>
 
 <script>
@@ -45,6 +43,9 @@ export default {
 </script>
 
 <style>
+.md-tabs.md-alignment-fixed.md-theme-default {
+  height: 100%;
+}
 .md-content.md-tabs-content.md-theme-default {
   height: 100% !important;
 }

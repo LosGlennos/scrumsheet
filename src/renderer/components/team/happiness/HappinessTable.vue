@@ -31,6 +31,7 @@ export default {
   }),
   created: function(event) {
     this.getHappiness();
+    this.$eventHub.$on('add-sprint', this.getHappiness);
   },
   methods: {
     saveHappiness: function(rating, sprintId) {
